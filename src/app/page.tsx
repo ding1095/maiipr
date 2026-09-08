@@ -50,11 +50,18 @@ export default function Home() {
 
         <div className="flex flex-col sm:flex-row w-full justify-center gap-5">
           <Link
-            href="/dashboard"
+            href="/quiz"
             className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full overflow-hidden shadow-lg hover:shadow-pink-500/30 transition-all duration-300 hover:-translate-y-1"
           >
             <span className="mr-3 text-2xl group-hover:animate-bounce">🚀</span>
             เริ่มทำแบบทดสอบ
+          </Link>
+          <Link
+            href="/dashboard"
+            className="inline-flex items-center justify-center px-8 py-4 font-semibold text-white bg-blue-500 rounded-full hover:bg-blue-600 transition-all duration-300"
+          >
+            <span className="mr-2">📊</span>
+            ดูประวัติคะแนน
           </Link>
           <Link
             href="/admin"
