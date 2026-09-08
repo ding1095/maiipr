@@ -1,28 +1,67 @@
+'use client';
 import Link from "next/link";
+import { useState, useEffect } from "react";
+
+const encouragements = [
+  "ตั้งใจทำนะคะ ครูมายเป็นกำลังใจให้ทุกคนค่ะ ✌️",
+  "ความพยายามอยู่ที่ไหน ความสำเร็จอยู่ที่นั่น ลุยเลย! - ครูมาย",
+  "ไม่ต้องเครียดนะคะ ทำเต็มที่ก็พอแล้ว 💖 - ครูมาย",
+  "เชื่อมั่นในตัวเองนะ ครูมายรู้ว่าพวกเราทำได้! ✨",
+  "ข้อสอบไม่อยากเกินความพยายามของเรา สู้ๆ! 🎯 - ครูมาย",
+  "รวบรวมสมาธิ แล้วทำคะแนนให้เต็มที่เลย! 🌟 - ครูมาย",
+  "ครูมายเตรียมข้อสอบมาให้ฝึกฝน ขอให้สนุกกับการเรียนรู้นะคะ 📚"
+];
 
 export default function Home() {
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    // สุ่มข้อความเมื่อหน้าเว็บโหลด
+    const randomMsg = encouragements[Math.floor(Math.random() * encouragements.length)];
+    setMessage(randomMsg);
+  }, []);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start max-w-2xl text-center sm:text-left">
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-          ระบบทำแบบทดสอบออนไลน์
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 p-6 flex items-center justify-center font-sans text-gray-800">
+      <main className="w-full max-w-3xl bg-white p-10 sm:p-14 rounded-[3rem] shadow-2xl text-center transform transition-all duration-500 hover:shadow-3xl">
+        <div className="mb-6">
+          <div className="inline-block p-4 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full shadow-inner">
+            <span className="text-6xl drop-shadow-md">🎓</span>
+          </div>
+        </div>
+        
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500 mb-4 drop-shadow-sm leading-tight">
+          แบบทดสอบออนไลน์
         </h1>
-        <p className="text-lg leading-8 text-gray-600">
-          ยินดีต้อนรับสู่แพลตฟอร์มทำแบบทดสอบ (Online Quiz Platform) ที่สร้างด้วย Next.js และ Firebase
+        
+        <p className="text-lg sm:text-xl text-gray-500 mb-8 font-medium">
+          เตรียมตัวให้พร้อม แล้วมาพิชิตคะแนนกันเลย!
         </p>
 
-        <div className="flex gap-4 flex-col sm:flex-row w-full justify-center sm:justify-start">
+        <div className="min-h-[80px] flex items-center justify-center mb-10">
+          {message ? (
+            <div className="bg-gradient-to-r from-pink-50 to-purple-50 border border-pink-100 text-purple-800 px-8 py-5 rounded-2xl text-lg sm:text-xl font-semibold shadow-sm transition-all duration-500 ease-in-out transform hover:scale-105">
+              "{message}"
+            </div>
+          ) : (
+            <div className="animate-pulse bg-gray-100 h-16 w-3/4 rounded-2xl"></div>
+          )}
+        </div>
+
+        <div className="flex flex-col sm:flex-row w-full justify-center gap-5">
           <Link
             href="/dashboard"
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-blue-600 text-white gap-2 hover:bg-blue-700 text-sm sm:text-base h-10 sm:h-12 px-8"
+            className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full overflow-hidden shadow-lg hover:shadow-pink-500/30 transition-all duration-300 hover:-translate-y-1"
           >
-            ไปที่แดชบอร์ด
+            <span className="mr-3 text-2xl group-hover:animate-bounce">🚀</span>
+            เริ่มทำแบบทดสอบ
           </Link>
           <Link
             href="/admin"
-            className="rounded-full border border-solid border-gray-300 transition-colors flex items-center justify-center bg-white text-gray-900 hover:bg-gray-50 text-sm sm:text-base h-10 sm:h-12 px-8"
+            className="inline-flex items-center justify-center px-8 py-4 font-semibold text-gray-600 bg-gray-100 rounded-full hover:bg-gray-200 hover:text-gray-900 transition-all duration-300"
           >
-            ผู้ดูแลระบบ (Admin)
+            <span className="mr-2">⚙️</span>
+            สำหรับผู้ดูแล (Admin)
           </Link>
         </div>
       </main>
