@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import CSVUploader from "@/components/Admin/CSVUploader";
+import ManualQuestionForm from "@/components/Admin/ManualQuestionForm";
 import { db } from '@/lib/firebase/client';
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 
@@ -74,15 +75,23 @@ export default function AdminPage() {
           </div>
         ) : (
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold text-gray-800">
-                2. นำเข้าคำถามสำหรับ: <span className="text-blue-600">{title}</span>
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-800">
+                จัดการคำถามสำหรับ: <span className="text-purple-600">{title}</span>
               </h2>
-              <button onClick={() => setIsCreated(false)} className="text-sm text-gray-500 hover:underline">
+              <button onClick={() => setIsCreated(false)} className="text-sm text-gray-500 hover:text-purple-600 hover:underline">
                 สร้างชุดข้อสอบอื่น
               </button>
             </div>
-            <CSVUploader quizId={quizId} />
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <CSVUploader quizId={quizId} />
+              </div>
+              <div>
+                <ManualQuestionForm quizId={quizId} />
+              </div>
+            </div>
           </div>
         )}
       </div>
