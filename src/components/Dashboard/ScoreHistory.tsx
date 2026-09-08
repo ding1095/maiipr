@@ -12,12 +12,19 @@ export default function ScoreHistory() {
       try {
         const q = query(
           collection(db, 'results'), 
-          where('userId', '==', 'mai'),
-          orderBy('completedAt', 'desc')
+          where('userId', '==', 'mai')
         );
         
         const querySnapshot = await getDocs(q);
         const fetchedResults = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        
+        // เรียงลำดับจากล่าสุดไปเก่าสุดใน JavaScript เพื่อหลีกเลี่ยงปัญหา Firestore Index
+        fetchedResults.sort((a: any, b: any) => {
+          const timeA = a.completedAt?.toMillis() || 0;
+          const timeB = b.completedAt?.toMillis() || 0;
+          return timeB - timeA;
+        });
+        
         setResults(fetchedResults);
       } catch (error) {
         console.error("Error fetching results: ", error);
