@@ -30,7 +30,7 @@ export default function ScoreHistory() {
     };
 
     // Wait for auth to initialize
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged((user: any) => {
       if (user) {
         fetchResults();
       } else {
