@@ -9,16 +9,13 @@ export default function ScoreHistory() {
 
   useEffect(() => {
     const fetchResults = async () => {
-      const user = auth.currentUser;
-      if (!user) return setLoading(false);
-
-      const q = query(
-        collection(db, 'results'), 
-        where('userId', '==', user.uid),
-        orderBy('completedAt', 'desc')
-      );
-      
       try {
+        const q = query(
+          collection(db, 'results'), 
+          where('userId', '==', 'mai'),
+          orderBy('completedAt', 'desc')
+        );
+        
         const querySnapshot = await getDocs(q);
         const fetchedResults = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         setResults(fetchedResults);
@@ -29,19 +26,10 @@ export default function ScoreHistory() {
       }
     };
 
-    // Wait for auth to initialize
-    const unsubscribe = auth.onAuthStateChanged((user: any) => {
-      if (user) {
-        fetchResults();
-      } else {
-        setLoading(false);
-      }
-    });
-
-    return () => unsubscribe();
+    fetchResults();
   }, []);
 
-  if (loading) return <div className="p-10 text-center">กำลังโหลดประวัติ...</div>;
+  if (loading) return <div className="p-10 text-center">กำลังโหลดประวัติของมาย...</div>;
 
   return (
     <div className="p-6 bg-white rounded-lg shadow max-w-4xl mx-auto mt-10">

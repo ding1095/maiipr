@@ -32,16 +32,18 @@ export default function QuizTaker({ quizId, questions }: { quizId: string, quest
     setScore(calculatedScore);
     setIsSubmitted(true);
 
-    const user = auth.currentUser;
-    if (user) {
+    try {
       await addDoc(collection(db, 'results'), {
-        userId: user.uid,
+        userId: 'mai', // บันทึกให้เป็นของ "มาย" เสมอ
+        studentName: 'มาย',
         quizId,
         score: calculatedScore,
         totalQuestions: questions.length,
         userAnswers: answers,
         completedAt: serverTimestamp()
       });
+    } catch (error) {
+      console.error("Error saving score:", error);
     }
   };
 
