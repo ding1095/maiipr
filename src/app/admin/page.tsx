@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import CSVUploader from "@/components/Admin/CSVUploader";
 import ManualQuestionForm from "@/components/Admin/ManualQuestionForm";
+import QuestionList from "@/components/Admin/QuestionList";
 import { db } from '@/lib/firebase/client';
 import { doc, setDoc, serverTimestamp, collection, getDocs, query, orderBy } from 'firebase/firestore';
 
@@ -206,6 +207,11 @@ export default function AdminPage() {
                 <ManualQuestionForm quizId={quizId} />
               </div>
             </div>
+            
+            <hr className="my-8 border-gray-200" />
+            
+            {/* รายการข้อสอบสำหรับแก้ไข/ลบ */}
+            <QuestionList quizId={quizId} />
           </div>
         )}
       </div>
